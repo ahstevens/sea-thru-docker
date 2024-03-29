@@ -24,6 +24,9 @@ RUN apt-get update && apt-get install -y \
     libxext6 && \
     apt-get clean
 
+# Make link to tiff lib to avoid version error (this is probably the wrong way to fix this, oh well!)
+RUN ln -s /usr/lib/x86_64-linux-gnu/libtiff.so.6 /usr/lib/x86_64-linux-gnu/libtiff.so.5
+
 # Install miniconda (Basically anaconda without all the defaults, just the CLI.)
 # This'll let us use whichever version of python is compatible with seathru and monodepth2. Should also make it less painful to upgrade in the future.
 RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
